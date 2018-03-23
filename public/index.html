@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My App</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.js"></script>
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <div id="vue-app">
+
+    <router-view></router-view>
+
+  </div>
+</body>
+</html>
+
+<template id="no-user-page">
+  <div class="vue-component">
+
+    <h1>No user</h1>
+    <a href="/#/login">login</a>
+
+  </div>
+</template>
+
+
+<!-- Requests template -->
+
+<template id="requests-new-page">
+  <div class="vue-component">
+
+  <div class="container">  
+  
+  <ul>
+    <li class="text-danger" v-for="error in errors"{{ error }}></li>
+  </ul>
+  <div class="form-group">
+    <label>Enter the Nanny's id to request service:</label> 
+    <input type="integer" class="form-control" v-model="nanny_id">  
+  </div>
+  <div class="form-group">
+    <label>Hourly Rate you will pay for your care service:</label>
+    <input type="integer" class="form-control" v-model="pay_rate"> 
+  </div>
+  <div class="form-group">
+   <label>Number of people service provider will be incharge of:</label><input type="integer" class="form-control" v-model="number_of_children">  
+  </div>
+  <div class="form-group">
+    <label>Start Time:</label>
+    <input type="integer" class="form-control" v-model="start_time">
+  </div>
+  <div class="form-group">
+    <label>End Time:</label>
+    <input type="integer" class="form-control" v-model="end_time">
+  </div>
+  <div class="form-group">
+    <label>Location of service to be provided:</label>
+    <input type="integer" class="form-control" v-model="location">
+  </div>
+  </div>
+  <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+  </div> 
+</template>
+
+<template id="requests-show-page">
+  <div class="vue-component">
+    <section class = "bg-gray-dark-2">
+      <div class="container">
+
+        <div v-for="request in requests" class="col-lg-4 bg-gray-dark-3 border-md-0 border-bottom border-right border-gray-2" data-mh="mh-col-services">
+          <div class="px-lg-3 py-5 py-lg-4 text-center text-lg-left">
+            <i class="icon-Chess text-base-color title-extra-large"></i>
+           <!--  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentRequest(request)">See Requests</button> -->
+            <a class="btn btn-warning" v-bind:href="'/#/requests/'">See Requests</a>  
+          </div>  
+        </div> 
+      </div> 
+    </section>
+    <h1>{{ message }}</h1>
+  </div>
+</template>
+
+<template id="request-edit-page">
+  <div class="vue-component">
+    
+  <div class="container">  
+  
+  <ul>
+    <li class="text-danger" v-for="error in errors"{{ error }}></li>
+  </ul>
+  <div class="form-group">
+    <label>Enter your user id:</label>
+    <input type="integer" class="form-control" v-model="parent_id"> 
+  </div>
+  <div class="form-group">
+    <label>Enter the Nanny's id to request service:</label> 
+    <input type="integer" class="form-control" v-model="nanny_id">  
+  </div>
+  <div class="form-group">
+    <label>Hourly Rate you will pay for your care service:</label>
+    <input type="integer" class="form-control" v-model="pay_rate"> 
+  </div>
+  <div class="form-group">
+   <label>Number of people service provider will be incharge of:</label><input type="integer" class="form-control" v-model="number_of_children">  
+  </div>
+  <div class="form-group">
+    <label>Start Time:</label>
+    <input type="integer" class="form-control" v-model="start_time">
+  </div>
+  <div class="form-group">
+    <label>End Time:</label>
+    <input type="integer" class="form-control" v-model="end_time">
+  </div>
+  <div class="form-group">
+    <label>Location of service to be provided:</label>
+    <input type="integer" class="form-control" v-model="location">
+  </div>
+   <button class="btn btn-primary" v-on:click="submit()">Submit</button> 
+  </div> 
+
+  </div> 
+</template>
+
+<template id="Requests-accept_page">
+  <div class="vue-component">
+    <div class="container">
+    </div>
+  </div>
+</template>
+
+<!-- user templates -->
+
+<template id="users-edit-page">
+ 
+  <div class="vue-component">
+
+    <div class="container">
+      <h1>Update profile</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li> 
+      </ul> 
+      <div class="form-group">
+        <label>First Name:</label>
+        <input type="text" class="form=control" v-model="first_name">    
+      </div> 
+      <div class="form-group">
+        <label>Last Name:</label>
+        <input type="text" class="form=control" v-model="last_name"> 
+      </div>
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="text" class="form=control" v-model="email">      
+      </div>
+      <div class="form-group">
+        <label>Gender:</label>
+        <input type="text" class="form=control" v-model="gender">      
+      </div>
+      <div class="form-group">
+        <label>City:</label>
+        <input type="text" class="for=control" v-model="city">      
+      </div>
+      <div class="form-group">
+        <label>State:</label>
+        <input type="text" class="form=control" v-model="state">      
+      </div>
+      <div class="form-group">
+        <label>Zip Code:</label>
+        <input type="text" class="form=control" v-model="zipCode">      
+      </div>
+      <div class="form-group">
+        <label>Profile photo:</label>
+        <input type="text" class="form-control" v-model="imageUrl">      
+      </div>
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="text" class="form=control" v-model="password">      
+      </div> 
+      <div class="form-group">
+        <label>Password Confirmation:</label>
+        <input type="text" class="form=control" v-model="password_confirmation">      
+      </div> 
+
+      <div>
+        Image: <input type="file" v-on:change="uploadFile($event)">
+      </div>
+
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>   
+    </div>  
+  </div>
+</template>
+
+
+
+
+<!-- Myprofile template
+ -->
+<template id="user-profile-page">
+  <div class="vue-component">
+    <div v-if="user" class="container">
+      <h3>{{ user.image }}</h3>
+      <h3>{{ user.first_name }}</h3>
+      <h3>{{ user.last_name }}</h3>
+      <h3>{{ user.email }}</h3>
+      <h3>{{ user.gender }}</h3>
+      <h3>{{ user.city }}</h3>
+      <h3>{{ user.state }}</h3>
+      <h3>{{ user.zipCode }}</h3>
+
+      <a class="btn btn-primary" v-bind:href="'/#/users/' + user.id + '/edit'">Edit</a>
+    </div>
+
+
+    <h3>Parent Pending</h3>
+    <div v-for="request in parent_pending_requests">
+      <a v-bind:href="'/#/requests/' + request.id + '/edit'">
+        <!-- <a v-bind:href="'/#/requests/' + request.id + '/new'"> -->
+          <p>Status: {{ request.status }}</p>
+          <p>Start Time: {{ request.start_time }}</p>
+          <p>End Time: {{ request.end_time }}</p>
+          <p>Location: {{request.location }}</p>
+          <p>Number of children: {{ request.number_of_children }}</p>
+          <p>Hourly Rate: {{ request.pay_rate }}</p>
+      <a class="btn btn-primary" v-bind:href="'/#/requests/' + request.id + '/edit'">Update request</a>
+      <button class="btn btn-primary" v-on:click="parentDestroy(request)">Cancel request</button> 
+        </a>
+      <!-- </a>  -->
+    </div>
+
+     <h3>Parent Accepted</h3>
+    <div v-for="request in parent_accepted_requests">
+          <p>Status: {{ request.status }}</p>
+          <p>Start Time: {{ request.start_time }}</p>
+          <p>End Time: {{ request.end_time }}</p>
+          <p>Location: {{request.location }}</p>
+          <p>Number of children: {{ request.number_of_children }}</p>
+          <p>Hourly Rate: {{ request.pay_rate }}</p>
+      <button class="btn btn-primary" v-on:click="parentDestroy(request)">Delete request</button> 
+    </div>
+
+     <h3>Nanny Pending</h3>
+    <div v-for="request in nanny_pending_requests">
+          <p>Status: {{ request.status }}</p>
+          <p>Start Time: {{ request.start_time }}</p>
+          <p>End Time: {{ request.end_time }}</p>
+          <p>Location: {{request.location }}</p>
+          <p>Number of children: {{ request.number_of_children }}</p>
+          <p>Hourly Rate: {{ request.pay_rate }}</p>
+      <button class="btn btn-primary" v-on:click="nannyAccept(request)">Accept request</button> 
+      <button class="btn btn-primary" v-on:click="nannyDecline(request)">Decline request</button> 
+    </div>
+  
+     <h3>Nanny Accepted</h3>
+    <div v-for="request in nanny_accepted_requests">
+      <a v-bind:href="'/#/requests/' + request.id + '/edit'">
+        <a v-bind:href="'/#/requests/' + request.id + '/new'">
+          <p>Status: {{ request.status }}</p>
+          <p>Start Time: {{ request.start_time }}</p>
+          <p>End Time: {{ request.end_time }}</p>
+          <p>Location: {{request.location }}</p>
+          <p>Number of children: {{ request.number_of_children }}</p>
+          <p>Hourly Rate: {{ request.pay_rate }}</p>
+        </a>
+      </a> 
+    </div>
+    <div>
+    </div>  
+  </div>
+</template>
+
+
+<!-- Authorization templates
+ -->
+<template id="signup-page">
+  <div class="vue-component">
+    <div class="container">
+      <h1>Signup</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>First Name:</label>
+        <input type="text" class="form-control" v-model="first_name">
+      </div>
+      <div class="form-group">
+        <label>Last Name:</label>
+        <input type="text" class="form-control" v-model="last_name">
+      </div>
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" class="form-control" v-model="email">
+      </div>
+      <div class="form-group">
+        <label>Gender:</label>
+        <input type="text" class="form-control" v-model="gender">
+      </div>
+      <div class="form-group">
+        <label>Age:</label>
+        <input type="integer" class="form-control" v-model="age">
+      </div>
+      <div class="form-group">
+        <label>City:</label>
+        <input type="text" class="form-control" v-model="city">
+      </div>
+      <div class="form-group">
+        <label>State:</label>
+        <input type="text" class="form-control" v-model="state">
+      </div>
+      <div class="form-group">
+        <label>Zip Code:</label>
+        <input type="integer" class="form-control" v-model="zipCode">
+      </div>
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="Password" class="form-control" v-model="password">
+      </div>
+      <div class="form-group">
+        <label>Password Confirmation:</label>
+        <input type="password" class="form-control" v-model="password_confirmation">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </div>
+  </div>  
+</template>
+
+<template id="login-page">
+  <div class="vue-component">
+    <div class="container">
+      <h1>Login</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" class="form-control" v-model="email">
+      </div>
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" class="form-control" v-model="password">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </div>
+  </div> 
+</template>
+
+<template id="logout-page">
+  <div class="vue-component">
+    <a class=" btn btn-primary" href="/#/logout">Log Out</a>
+  </div>
+  
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
