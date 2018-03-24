@@ -4,8 +4,14 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
 
+  has_attached_file :image
+
   has_many :created_requests, class_name: "Request", foreign_key: "parent_id"
   has_many :received_requests, class_name: "Request", foreign_key: "nanny_id"
+
+  validates_attachment :image,
+    content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+
 
   def nanny_pending_requests
     received_requests.where(status: "pending")

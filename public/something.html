@@ -1,0 +1,422 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Explore
+ @CrunchyKitty
+Sign out
+1
+0 1 StraightOuttaConstant/cookbook-app
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
+cookbook-app/public/index.html
+8dc5166  8 days ago
+@JackMarx JackMarx modals
+     
+Executable File  394 lines (345 sloc)  17.3 KB
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Josh's Cookbook</title>
+        <meta name="description" content=""/>
+        <meta name="keywords" content=""/>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <!-- Bootstrap CSS -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        
+        <!-- Font Awesome CSS -->
+        <link href="assets/css/icons-mind.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        
+        <!-- Include all css plugins (below), or include individual files as needed -->
+        <link href="assets/css/magnific-popup.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/flexslider.css" rel="stylesheet" type="text/css">
+        
+        <!-- Theme CSS -->
+        <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+        
+        <!-- Color Scheme CSS -->
+        <link href="assets/css/color_pink.css" rel="stylesheet" type="text/css">
+
+        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.js"></script>
+        <script src="index.js" defer></script>
+    </head>
+    <body id="page-top">
+        <div id="vue-app">
+            
+
+            <!-- Section - Home Start -->
+            <section id="home" class="home-bg-static bg-cover bg-gray-dark bg-overlay-black-5 w-100">
+                <div class="container h-100">
+                    <div class="row align-items-center h-100 justify-content-center">
+                        <div class="col-lg-9 text-center">
+                            <h2 class="font-alt font-w-600 letter-spacing-2 m-0 mt-3 opacity-9-5 text-uppercase text-white title-sm-extra-large-2 title-extra-large-4">Josh's Cookbook</h2>
+                            <span class="d-block font-alt mt-2 opacity-9-5 text-white title-sm-extra-large title-extra-large-3">Tasty Treats</span>
+
+                        </div>
+                        <!-- //.col-lg-9 -->
+                    </div>
+                    <!-- //.row -->
+                </div>
+                <!-- //.container -->
+            </section>
+            <!-- //Section - Home End -->
+            
+            
+            <!-- Navigation Start -->
+            <nav id="navigation" class="navbar navbar-dark navbar-expand-lg bg-dark">
+                <div class="container">
+                    <div class="navbar-header d-lg-none">
+                        <a class="navbar-brand page-scroll" href="#page-top">BERG</a>
+                        
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-berg" aria-controls="navbar-berg" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <!-- //.navbar-header -->
+                    
+                    <div class="navbar-collapse collapse justify-content-center" id="navbar-berg">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link page-scroll" href="#home">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link page-scroll" href="#profile">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link page-scroll" href="#portfolio">Portfolio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link page-scroll" href="#services">Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link page-scroll" href="#resume">Resume</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link page-scroll" href="#references">References</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link page-scroll" href="#skills">Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link page-scroll" href="#contact">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- //.navbar-collapse -->
+                </div>
+                <!-- //.container -->
+            </nav>
+            <!-- //Navigation End -->
+
+            <router-view></router-view>
+            
+            <!-- Footer End -->
+            <footer class="bg-gray-dark">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col text-center">
+                            <ul class="m-0 p-0">
+                                <li class="list-inline-item">
+                                    <a href="#" target="_blank" class="bg-gray-2 box-shadow-wide rounded text-white text-extra-large">
+                                        <i class="fa fa-facebook ease"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" target="_blank" class="bg-gray-2 box-shadow-wide rounded text-white text-extra-large">
+                                        <i class="fa fa-twitter ease"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" target="_blank" class="bg-gray-2 box-shadow-wide rounded text-white text-extra-large">
+                                        <i class="fa fa-linkedin ease"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" target="_blank" class="bg-gray-2 box-shadow-wide rounded text-white text-extra-large">
+                                        <i class="fa fa-dribbble ease"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" target="_blank" class="bg-gray-2 box-shadow-wide rounded text-white text-extra-large">
+                                        <i class="fa fa-instagram ease"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" target="_blank" class="bg-gray-2 box-shadow-wide rounded text-white text-extra-large">
+                                        <i class="fa fa-pinterest ease"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                            <p class="m-0 mt-4 text-gray text-medium">&copy; 2017 Nick Berg. All rights reserved.</p>
+                        </div>
+                        <!-- //.col -->
+                    </div>
+                    <!-- //.row -->
+                </div>
+                <!-- //.container -->
+            </footer>
+            <!-- //Footer End -->
+            
+            
+            <!-- Scroll to top -->
+            <a href="#page-top" class="page-scroll scroll-to-top bg-base-color"><i class="fa fa-angle-up"></i></a>
+            
+        </div>
+        <!-- Main JS -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        
+        <!-- Include all js plugins (below) -->
+        <script src="assets/js/pace.min.js"></script>
+        <script src="assets/js/jquery.sticky.js"></script>
+        <script src="assets/js/jquery.easing.min.js"></script>
+        <script src="assets/js/jquery.matchHeight.min.js"></script>
+        <script src="assets/js/jquery.inview.min.js"></script>
+        <script src="assets/js/jquery.countTo.js"></script>
+        <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="assets/js/jquery.flexslider.min.js"></script>
+        <script src="assets/js/jquery.validate.min.js"></script>
+        
+        <!-- Theme JS -->
+        <script src="assets/js/theme.js"></script>
+        
+    </body>
+</html>
+
+
+<!-- Recipe Templates -->
+
+<template id="recipes-index-page">
+  <div class="vue-component">
+    <section class="bg-gray-dark-2">
+        <div class="container">
+
+            <div class="row mt-5 pt-5">
+                <div v-for="recipe in recipes" class="col-lg-4 bg-gray-dark-3 border-md-0 border-bottom border-right border-gray-2" data-mh="mh-col-services">
+                    <div class="px-lg-3 py-5 py-lg-4 text-center text-lg-left">
+                        <i class="icon-Chess text-base-color title-extra-large"></i>
+                        <span class="d-block font-alt letter-spacing-2 mt-2 text-extra-large text-uppercase text-white">{{ recipe.title }}</span>
+                        <span class="bg-base-color ml-lg-0 mt-3 mx-auto sep-line-thick"></span>
+                        <p class="m-0 mt-3 text-gray text-medium">Prep Time: {{ recipe.formatted.prep_time }}</p>
+                        <p class="m-0 mt-3 text-gray text-medium">Ingredients: 
+                            <ul>
+                                <li class="m-0 mt-3 text-gray text-medium" v-for="ingredient in recipe.formatted.ingredients">{{ ingredient }}</li>
+                            </ul>
+                        </p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentRecipe(recipe)">
+                          More info
+                        </button>
+                    </div>
+                    <!-- //.px-lg-3 -->
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ currentRecipe.title }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <h1>{{ currentRecipe.title }}</h1>
+                            <h4>Prep Time: {{ currentRecipe.formatted.prep_time }}</h4>
+                            <h3>Ingredients</h3>
+                            <ul>
+                              <li v-for="ingredient in currentRecipe.formatted.ingredients">{{ ingredient }}</li>
+                            </ul>
+                            <h3>Directions</h3>
+                            <ol>
+                              <li v-for="direction in currentRecipe.formatted.directions">{{ direction }}</li>
+                            </ol>
+                            <img v-bind:src="currentRecipe.image_url" alt="">
+                            <a class="btn btn-warning" v-bind:href="'/#/recipes/' + recipe.id + '/edit'">Edit</a>
+                            <a class="btn btn-danger" v-bind:href="'/#/recipes/' + recipe.id + '/delete'">Delete</a>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <!-- //.col-lg-4 -->
+            </div>
+        </div>
+    </section>
+  </div>
+</template>
+
+<template id="recipes-new-page">
+  <div class="vue-component">
+
+    <div class="container">
+      <h1>New Recipe</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Title:</label> 
+        <input type="text" class="form-control" v-model="title">
+      </div>
+      <div class="form-group">
+        <label>Ingredients:</label>
+        <input type="text" class="form-control" v-model="ingredients">
+      </div>
+      <div class="form-group">
+        <label>Directions:</label>
+        <input type="text" class="form-control" v-model="directions">
+      </div>
+      <div class="form-group">
+        <label>Prep Time:</label>
+        <input type="text" class="form-control" v-model="prepTime">
+      </div>
+      <div class="form-group">
+        <label>Image URL:</label>
+        <input type="text" class="form-control" v-model="imageUrl">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </div>
+
+  </div>
+</template>
+
+<template id="recipes-show-page">
+  <div class="vue-component">
+    <div class="container">
+      <h1>{{ recipe.title }}</h1>
+      <h4>Prep Time: {{ recipe.formatted.prep_time }}</h4>
+      <h3>Ingredients</h3>
+      <ul>
+        <li v-for="ingredient in recipe.formatted.ingredients">{{ ingredient }}</li>
+      </ul>
+      <h3>Directions</h3>
+      <ol>
+        <li v-for="direction in recipe.formatted.directions">{{ direction }}</li>
+      </ol>
+      <img v-bind:src="recipe.image_url" alt="">
+      <a class="btn btn-warning" v-bind:href="'/#/recipes/' + recipe.id + '/edit'">Edit</a>
+      <a class="btn btn-danger" v-bind:href="'/#/recipes/' + recipe.id + '/delete'">Delete</a>
+    </div>
+  </div>
+</template>
+
+<template id="recipes-edit-page">
+  <div class="vue-component">
+
+    <div class="container">
+      <h1>Update Recipe</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Title:</label> 
+        <input type="text" class="form-control" v-model="title">
+      </div>
+      <div class="form-group">
+        <label>Ingredients:</label>
+        <input type="text" class="form-control" v-model="ingredients">
+      </div>
+      <div class="form-group">
+        <label>Directions:</label>
+        <input type="text" class="form-control" v-model="directions">
+      </div>
+      <div class="form-group">
+        <label>Prep Time:</label>
+        <input type="text" class="form-control" v-model="prepTime">
+      </div>
+      <div class="form-group">
+        <label>Image URL:</label>
+        <input type="text" class="form-control" v-model="imageUrl">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </div>
+
+  </div>
+</template>
+
+<!-- Authorization Templates -->
+
+<template id="signup-page">
+  <div class="vue-component">
+
+    <div class="container">
+      <h1>Signup</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Name:</label> 
+        <input type="text" class="form-control" v-model="name">
+      </div>
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" class="form-control" v-model="email">
+      </div>
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" class="form-control" v-model="password">
+      </div>
+      <div class="form-group">
+        <label>Password confirmation:</label>
+        <input type="password" class="form-control" v-model="passwordConfirmation">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </div>
+
+  </div>
+</template>
+
+<template id="login-page">
+  <div class="vue-component">
+
+    <div class="container">
+      <h1>Login</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" class="form-control" v-model="email">
+      </div>
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" class="form-control" v-model="password">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </div>
+
+  </div>
+</template>
+
+
+
+
+
+
+
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About

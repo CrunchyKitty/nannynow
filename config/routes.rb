@@ -18,6 +18,6 @@ Rails.application.routes.draw do
  get "/profiles/:current_user" => "users#show"
  post "/users/images" => "users#image"
  
- get "/users/nannies" => "users#nannies"
+ get "/users/:id/nannies" => "users#nannies"
  
 end

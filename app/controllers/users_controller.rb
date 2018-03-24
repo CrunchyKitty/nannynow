@@ -4,11 +4,13 @@ class UsersController < ApplicationController
     if params[:fist_name] && params[:last_name]
       search_results = User.where('first_name iLike ? AND last_name iLike ?', params[:first_name], params[:last_name])
     end
+
     render json: user.as_json
   end
 
   def nannies
     nannies = User.where(nanny:true)
+    # puts "is doing this"
     render json: nannies.as_json
   end
 
@@ -32,7 +34,7 @@ class UsersController < ApplicationController
   end 
 end
 
-  def show
+  def show 
     @user = User.find(params[:id])
     render 'show.json.jbuilder'
   end

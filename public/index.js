@@ -135,14 +135,57 @@ var RequestsUpdatePage = {
   }
 }
 
-var RequestsDestroyPage = {
+var UsersNannyPage  = {
+  template: "#users-nanny-page",
+  data: function() {
+    return {
+       nannies: [],
+       // users:[]
+      // nanny: true,
+      // currentUser: {formatted: {}}
+    };
+  },
   created: function() {
-    axios.delete("/requests/" + this.$route.params.id)
+    axios.get("/users/:id/nannies")
       .then(function(response) {
-        router.push("/")
-      });
+        this.nannies = response.data;
+        console.log(this.nannies);
+      }.bind(this));
+  },
+  methods: {
+    setCurrentUser: function(nanny) {
+      this.currentUser = nanny;
+    }
+  },
+  computed: {}
+};
+
+
+var UsersShowPage = {
+  template: "#users-show-page",
+  data: function() {
+    return {
+      user: {
+        first_name: "",
+        last_name:"",
+        email:"",
+        gender:"",
+        city:"",
+        state:"",
+        zipCode:"",
+        imageUrl:"",
+        errors:[]   
+      }
+    }
+  },
+  created: function() {
+    axios.get("/users/ + this.$route.params.id" )
+        .then(function(response) {
+          this.user = response.data;
+        }.bind(this));
   }
-}
+};
+
 
 var UsersEditPage = {
     template: "#users-edit-page",
@@ -155,7 +198,7 @@ var UsersEditPage = {
       city:"",
       state:"",
       zipCode:"",
-      imageUrl:"",
+      // imageUrl:"",
       password:"",
       password_confirmation: "",
       errors:[]    
@@ -216,8 +259,6 @@ methods: {
           .post("http://localhost:3000/users/images", formData)
           .then(function(response) {
             console.log(response);
-            // this.title = "";
-            // this.body = "";
             event.target.value = "";
           }.bind(this));
       }
@@ -336,6 +377,9 @@ var SignupPage = {
           event.target.value = "";
         }.bind(this));
       }
+    },
+    submit:function() {
+      router.push("/login");
     }
   },
   computed: {}
@@ -364,7 +408,7 @@ var LoginPage = {
       })
       .catch(
         function(error){
-          this.errors = ["Invald email or password"];
+          this.errors = ["Invalid email or password"];
           this.email = "";
           this.password = "";
         }.bind(this)
@@ -377,7 +421,7 @@ var LogoutPage = {
   created: function() {
     axios.defaults.headers.common["Authorization"] = undefined;
     localStorage.removeItem("jwt");
-    router.push("/login");
+    router.push("/#/");
   }
 };
 
@@ -386,21 +430,20 @@ var router = new VueRouter({
   routes: [
 
   { path: "/", component: NoUserPage },
-  { path: "/profile", component: UserProfilePage },
-  // { path: "/users/:id", component: UsersShowPage },
 
+  { path: "/profile", component: UserProfilePage },
+
+  { path: "/users/nannies", component: UsersNannyPage },
+
+  { path: "/users/:id/edit", component: UsersEditPage },
   { path: "/requests/new", component: RequestsNewPage },
   { path: "/requests/:id", component: RequestsShowPage },
   { path: '/requests/:id/edit', component: RequestsEditPage },
-  // { path: '/requests/:id/accept', component: RequestsAcceptPage },
-  { path: '/requests/:id/destroy', component: RequestsDestroyPage},
+  
 
   { path: "/signup", component:SignupPage },
   { path: "/login", component:LoginPage },
   { path: "/logout", component:LogoutPage },
-
-  // { path: "/nanny/:id/accept", component: RequestsUpdatePage },
-  // { path: "/nanny/:id/decline", component: RequestsUpdatePage },
 
   ],
 
@@ -415,6 +458,11 @@ var router = new VueRouter({
 var app = new Vue({
   el: "#vue-app",
   router: router,
+  data: function() {
+    return{
+      menuZipora:false
+    }
+  },
   created: function() {
     var jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -422,4 +470,3 @@ var app = new Vue({
     }
   }
 });
-
