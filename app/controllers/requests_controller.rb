@@ -1,4 +1,9 @@
 class RequestsController < ApplicationController
+
+  before_action :authenticate_nanny, only: [:accept, :decline]
+
+  before_action :authenticate_parent, only: [:create, :update, :destroy]
+
   def create
     @request = Request.new(
                               parent_id: current_user.id,

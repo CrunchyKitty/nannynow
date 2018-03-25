@@ -8,10 +8,14 @@ class UsersController < ApplicationController
     render json: user.as_json
   end
 
-  def nannies
-    nannies = User.where(nanny:true)
-    # puts "is doing this"
-    render json: nannies.as_json
+  def nanny
+    users = User.where(nanny:true)
+    render json: users.as_json
+  end
+
+  def nanny_index
+    @users = User.where(nanny: true)
+    render 'index.json.jbuilder'
   end
 
   def create
@@ -19,6 +23,7 @@ class UsersController < ApplicationController
       first_name: params[:first_name],
       last_name: params[:last_name],
       email: params[:email],
+      image: params[:image],
       gender: params[:gender],
       age: params[:age],
       city: params[:city],
@@ -31,8 +36,8 @@ class UsersController < ApplicationController
       render json: {message: 'User created successfully'}
     else
       render json: {errors: 'Error creating account'}
-  end 
-end
+    end 
+  end
 
   def show 
     @user = User.find(params[:id])
@@ -52,6 +57,7 @@ end
     @user.city = params[:city] || @user.city
     @user.state = params[:state] || @user.state
     @user.zip_code = params[:zip_code] || @user.zip_code
+    @user.image = params[:image] || @user.image
 
     if @user.save
       render 'show.json.jbuilder'
@@ -65,7 +71,7 @@ end
     user.destroy
     render json: {message: "Successfully deleted profile"}
   end
-end
+end 
 
 
 

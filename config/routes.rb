@@ -18,6 +18,7 @@ Rails.application.routes.draw do
  get "/profiles/:current_user" => "users#show"
  post "/users/images" => "users#image"
  
- get "/users/:id/nannies" => "users#nannies"
+ get "/nannies" => "users#nanny_index"
+ get "/users/:id/nanny" => "users#nanny"
  
 end

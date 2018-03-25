@@ -6,3 +6,6 @@ json.gender user.gender
 json.city user.city
 json.state user.state
 json.zip_code user.zip_code
+json.image user.image
+json.parent user.parent
+json.nanny user.nanny

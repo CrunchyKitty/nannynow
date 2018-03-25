@@ -20,6 +20,9 @@ var RequestsNewPage = {
       errors:[]
     };
   },
+  created: function() {
+    this.nanny_id = this.$route.params.nanny_id;
+  },
   methods: {
     submit: function() {
       var params = {
@@ -135,27 +138,20 @@ var RequestsUpdatePage = {
   }
 }
 
-var UsersNannyPage  = {
-  template: "#users-nanny-page",
+var NannyIndexPage  = {
+  template: "#nanny-index-page",
   data: function() {
     return {
        nannies: [],
-       // users:[]
-      // nanny: true,
-      // currentUser: {formatted: {}}
     };
   },
   created: function() {
-    axios.get("/users/:id/nannies")
+    axios.get("/nannies")
       .then(function(response) {
         this.nannies = response.data;
-        console.log(this.nannies);
       }.bind(this));
   },
   methods: {
-    setCurrentUser: function(nanny) {
-      this.currentUser = nanny;
-    }
   },
   computed: {}
 };
@@ -188,84 +184,105 @@ var UsersShowPage = {
 
 
 var UsersEditPage = {
-    template: "#users-edit-page",
-    data: function () {
-      return {
-      first_name: "",
-      last_name:"",
-      email:"",
-      gender:"",
-      city:"",
-      state:"",
-      zipCode:"",
-      // imageUrl:"",
-      password:"",
-      password_confirmation: "",
-      errors:[]    
-      };
-    },
-    created: function () {
-      axios 
-      .get("/users/" + this.$route.params.id)
-      .then(function(response) {
-          console.log(response.data);
-          var user = response.data;
-          this.first_name = user.first_name
-          this.last_name = user.last_name
-          this.email = user.email
-          this.gender = user.gender
-          this.city = user.city
-          this.state = user.state
-          this.zipCode = user.zipCode
-          this.image_url = user.image_url
-          this.password = user.password
-          this.password_confirmation = user.passwordConfirmation
-        }.bind(this));
-    }, 
-
-methods: {
-  submit: function () {
-    var params = {
-      first_name: this.first_name,
-      last_name: this.last_name,
-      email: this.email,
-      gender: this.gender, 
-      city: this.city, 
-      state: this.state, 
-      zipCode: this.zipCode, 
-      image_url: this.image_url,
-      password: this.password, 
-      password_confirmation:this.password_confirmation 
+  template: "#users-edit-page",
+  data: function () {
+    return {
+    first_name: "",
+    last_name:"",
+    email:"",
+    gender:"",
+    city:"",
+    state:"",
+    zipCode:"",
+    imageUrl:"",
+    password:"",
+    password_confirmation: "",
+    errors:[]    
     };
-
+  },
+  created: function () {
     axios 
-      .patch("/users/" + this.$route.params.id, params).then(function(response) {
-        router.push("/profile");
-      }.bind(this))
-      .catch(
-        function(error) {
-          this.errors = error.response.data.errors;
+    .get("/users/" + this.$route.params.id)
+    .then(function(response) {
+        console.log(response.data);
+        var user = response.data;
+        this.first_name = user.first_name
+        this.last_name = user.last_name
+        this.email = user.email
+        this.gender = user.gender
+        this.city = user.city
+        this.state = user.state
+        this.zipCode = user.zipCode
+        this.image_url = user.image_url
+        this.password = user.password
+        this.password_confirmation = user.passwordConfirmation
+      }.bind(this));
+  }, 
+
+  methods: {
+    submit: function () {
+      var params = {
+        first_name: this.first_name,
+        last_name: this.last_name,
+        email: this.email,
+        gender: this.gender, 
+        city: this.city, 
+        state: this.state, 
+        zipCode: this.zipCode, 
+        image_url: this.image_url,
+        password: this.password, 
+        password_confirmation:this.password_confirmation 
+      };
+
+      axios 
+        .patch("/users/" + this.$route.params.id, params).then(function(response) {
           router.push("/profile");
         }.bind(this))
-      }
+        .catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+            router.push("/profile");
+          }.bind(this))
     },
-
     uploadFile: function(event) {
       if (event.target.files.length > 0) {
         var formData = new FormData();
         formData.append("image", event.target.files[0]);
 
         axios
-          .post("http://localhost:3000/users/images", formData)
+          .patch("/users/" + this.$route.params.id, formData)
           .then(function(response) {
             console.log(response);
             event.target.value = "";
           }.bind(this));
       }
     }
-  };
+  }
+};
   
-
+// var NannyProfilePage = {
+//   template: "#nanny-profile-page",
+//   data: function() {
+//     return {
+//       user: {
+//         first_name: "",
+//         last_name: "",
+//         email: "",
+//         gender: "",
+//         city: "",
+//         state: "",
+//         zipCode: "",
+//         imageUrl: "",
+//         errors: []
+//       },
+//     };
+//   },
+//   created: function() {
+//     axios.get("/users/:id/nanny").then(function(response) {
+//       this.user = response.data["user"];
+//     }.bind(this));
+//   }
+// };
 
 var UserProfilePage = {
   template: "#user-profile-page",
@@ -280,12 +297,14 @@ var UserProfilePage = {
         state: "",
         zipCode: "",
         imageUrl: "",
+        parent: "",
+        nanny: "",
         errors: []
       },
-      nanny_pending_requests: [{}],
-      nanny_accepted_requests: [{}],
-      parent_pending_requests: [{}],
-      parent_accepted_requests: [{}],
+      nanny_pending_requests: [{formatted: {}}],
+      nanny_accepted_requests: [{formatted: {}}],
+      parent_pending_requests: [{formatted: {}}],
+      parent_accepted_requests: [{formatted: {}}],
       nanny_id: "",
       pay_rate: "",
       number_of_children:"",
@@ -302,7 +321,7 @@ var UserProfilePage = {
       this.nanny_accepted_requests = response.data["nanny_accepted_requests"];
       this.parent_pending_requests = response.data["parent_pending_requests"];
       this.parent_accepted_requests = response.data["parent_accepted_requests"];
-    }.bind(this));
+    }.bind(this)).catch(function(error) {console.log(error)});
   },
   methods: {
     nannyAccept: function(request) {
@@ -318,7 +337,6 @@ var UserProfilePage = {
         this.nanny_declined_requests = response.data["nanny_declined_requests"];
       }.bind(this));
     },
-    
     parentDestroy: function(request) {
       axios.delete("/requests/" + request.id)
       .then(function(response) {
@@ -433,10 +451,12 @@ var router = new VueRouter({
 
   { path: "/profile", component: UserProfilePage },
 
-  { path: "/users/nannies", component: UsersNannyPage },
+  { path: "/nannies", component: NannyIndexPage },
+  // { path: "/users/:id/nanny", component: NannyProfilePage },
+
 
   { path: "/users/:id/edit", component: UsersEditPage },
-  { path: "/requests/new", component: RequestsNewPage },
+  { path: "/requests/new/:nanny_id", component: RequestsNewPage },
   { path: "/requests/:id", component: RequestsShowPage },
   { path: '/requests/:id/edit', component: RequestsEditPage },
   
@@ -460,7 +480,7 @@ var app = new Vue({
   router: router,
   data: function() {
     return{
-      menuZipora:false
+      menuZipora: false
     }
   },
   created: function() {
