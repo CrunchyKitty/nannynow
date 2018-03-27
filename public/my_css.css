@@ -84,7 +84,7 @@ section h3.section-subheading {
 }
 
 .btn-primary:active, .btn-primary:focus {
-  box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
+  box-shadow: 0 0 0 0.2rem rgba(254, 188, 55, 0.5) !important;
 }
 
 ::-moz-selection {
@@ -200,11 +200,15 @@ header.masthead .intro-text {
 }
 
 header.masthead .intro-text .intro-lead-in {
-  font-size: 22px;
+  font-size: 35px;
   font-style: italic;
-  line-height: 22px;
+  line-height: 9px;
   margin-bottom: 25px;
   font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: rgba(2, 78, 66, 0.9);
+    margin: 0px 120px;
+    padding: 30px 0px;
+    border-radius: 20px;
 }
 
 header.masthead .intro-text .intro-heading {
@@ -534,7 +538,7 @@ header.masthead .intro-text .intro-heading {
     margin-left: -50px;
   }
   .timeline > li .timeline-image h4 {
-    font-size: 13px;
+    font-size: 10px;
     line-height: 18px;
     margin-top: 16px;
   }
@@ -558,9 +562,9 @@ header.masthead .intro-text .intro-heading {
     margin-left: -75px;
   }
   .timeline > li .timeline-image h4 {
-    font-size: 18px;
-    line-height: 26px;
-    margin-top: 30px;
+    font-size: 15px;
+    line-height: 20px;
+    margin-top: 35px;
   }
   .timeline > li.timeline-inverted > .timeline-panel {
     padding: 0 20px 20px;
@@ -764,3 +768,17 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.btn-padding {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.hidden-card {
+  display: none;
+}
+
+
+/*#user-profile-page .btn .btn-primary {
+  padding: 15px;
+}*/

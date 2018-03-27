@@ -311,7 +311,11 @@ var UserProfilePage = {
       start_time:"",
       end_time:"",
       location:"",
-      errors:[]
+      errors:[],
+      show_nanny_pending: true,
+      show_nanny_accepted: true,
+      show_parent_pending: true,
+      show_parent_accepted: true
     };
   },
   created: function() {
@@ -342,7 +346,36 @@ var UserProfilePage = {
       .then(function(response) {
         router.push("/profile");  
       });
-    }
+    },
+    hideParentPending: function() {
+      if(this.show_parent_pending == true) {
+        this.show_parent_pending = false
+      } else {
+        this.show_parent_pending = true
+      }
+
+    },
+    hideParentAccepted: function() {
+      if (this.show_parent_accepted == true) {
+        this.show_parent_accepted = false  
+      } else {
+        this.show_parent_accepted = true
+      }
+    },
+    hideNannyPending: function() {
+      if (this.show_nanny_pending == true) {
+        this.show_nanny_pending = false 
+      } else {
+        this.show_nanny_pending = true
+      }
+    },
+     hideNannyAccepted: function() {
+      if (this.show_nanny_accepted == true) {
+        this.show_nanny_accepted = false
+      } else {
+        this.show_nanny_accepted = true
+      }
+    },
   }
 };
 
